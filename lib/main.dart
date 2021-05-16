@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:luck/auth_model.dart';
+import 'package:luck/login_check_page.dart';
+import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -8,21 +14,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
       ),
-      home: HomePage(),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Luck'),
+      home: ChangeNotifierProvider(
+        create: (_) => AuthModel(),
+        child: MaterialApp(
+          home: LoginCheckPage(),
+        ),
       ),
     );
   }
