@@ -13,15 +13,14 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.red,
-      ),
-      home: ChangeNotifierProvider(
-        create: (_) => AuthModel(),
-        child: MaterialApp(
-          home: LoginCheckPage(),
+    return ChangeNotifierProvider(
+      create: (_) => AuthModel(),
+      child: MaterialApp(
+        theme: ThemeData(
+          primarySwatch: Colors.blueGrey,
         ),
+        darkTheme: ThemeData.dark(),
+        home: LoginCheckPage(),
       ),
     );
   }
