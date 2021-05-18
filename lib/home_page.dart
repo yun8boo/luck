@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:luck/auth_model.dart';
+import 'package:luck/user_model.dart';
 import 'package:provider/provider.dart';
 import 'dart:math';
 
@@ -28,18 +29,7 @@ class HomePage extends StatelessWidget {
                   child: ElevatedButton(
                       onPressed: () async {
                         bool result = randomBox(0);
-                        print(result);
-                        // TODO
-                        CollectionReference luck = FirebaseFirestore.instance
-                            .collection('users')
-                            .doc(user.uid)
-                            .collection('luck');
-                        DocumentReference value = await luck.add({
-                          'point': result ? 1 : 0,
-                          'consecutiveWins': result ? 1 : 0,
-                          'totalWins': result ? 1 : 0
-                        });
-                        print(value);
+                        UserModel(user).updateUserLuck(result);
                       },
                       child: Text('1')),
                 ),
@@ -48,19 +38,8 @@ class HomePage extends StatelessWidget {
                   width: size.width / 4.5,
                   child: ElevatedButton(
                       onPressed: () async {
-                        // TODO
                         bool result = randomBox(1);
-                        print(result);
-                        CollectionReference luck = FirebaseFirestore.instance
-                            .collection('users')
-                            .doc(user.uid)
-                            .collection('luck');
-                        DocumentReference value = await luck.add({
-                          'point': result ? 1 : 0,
-                          'consecutiveWins': result ? 1 : 0,
-                          'totalWins': result ? 1 : 0
-                        });
-                        print(value);
+                        UserModel(user).updateUserLuck(result);
                       },
                       child: Text('2')),
                 ),
@@ -71,17 +50,7 @@ class HomePage extends StatelessWidget {
                       onPressed: () async {
                         // TODO
                         bool result = randomBox(2);
-                        print(result);
-                        CollectionReference luck = FirebaseFirestore.instance
-                            .collection('users')
-                            .doc(user.uid)
-                            .collection('luck');
-                        DocumentReference value = await luck.add({
-                          'point': result ? 1 : 0,
-                          'consecutiveWins': result ? 1 : 0,
-                          'totalWins': result ? 1 : 0
-                        });
-                        print(value);
+                        UserModel(user).updateUserLuck(result);
                       },
                       child: Text('3')),
                 ),

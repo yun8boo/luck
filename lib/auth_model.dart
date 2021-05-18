@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/material.dart';
+import 'package:luck/user_model.dart';
 
 class AuthModel extends ChangeNotifier {
   User _user;
@@ -66,6 +67,7 @@ class AuthModel extends ChangeNotifier {
       UserCredential _userCredential = await auth
           .createUserWithEmailAndPassword(email: email, password: password);
       _user = _userCredential.user;
+      UserModel(_user).createUser();
       notifyListeners();
     } catch (error) {}
   }
