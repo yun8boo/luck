@@ -6,6 +6,7 @@ class UserModel extends ChangeNotifier {
   UserModel(this.user);
   final User user;
 
+  // TODO 最高連勝記録保持
   Future<void> createUser() async {
     try {
       FirebaseFirestore _firestore = FirebaseFirestore.instance;

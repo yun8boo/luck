@@ -43,17 +43,6 @@ class HomePage extends StatelessWidget {
                       },
                       child: Text('2')),
                 ),
-                SizedBox(
-                  height: size.width / 4.5,
-                  width: size.width / 4.5,
-                  child: ElevatedButton(
-                      onPressed: () async {
-                        // TODO
-                        bool result = randomBox(2);
-                        UserModel(user).updateUserLuck(result);
-                      },
-                      child: Text('3')),
-                ),
               ],
             ),
             ElevatedButton(
@@ -78,6 +67,6 @@ class HomePage extends StatelessWidget {
 
   bool randomBox(int index) {
     Random rand = Random();
-    return rand.nextInt(2) == index;
+    return rand.nextInt(1) == index;
   }
 }
