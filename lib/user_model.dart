@@ -24,7 +24,16 @@ class UserModel extends ChangeNotifier {
     }
   }
 
-  Future<DocumentSnapshot> getUser() async {
+  Future<CollectionReference> getUserCollection() async {
+    try {
+      FirebaseFirestore _firestore = FirebaseFirestore.instance;
+      return _firestore.collection('users');
+    } catch (error) {
+      print(error);
+    }
+  }
+
+  Future<DocumentSnapshot> getUserDocSnapShot() async {
     try {
       FirebaseFirestore _firestore = FirebaseFirestore.instance;
       return _firestore.collection('users').doc(user.uid).get();
@@ -38,7 +47,7 @@ class UserModel extends ChangeNotifier {
     try {
       FirebaseFirestore _firestore = FirebaseFirestore.instance;
       DocumentReference _users = _firestore.collection('users').doc(user.uid);
-      DocumentSnapshot userData = await getUser();
+      DocumentSnapshot userData = await getUserDocSnapShot();
       int _point = userData.data()['point'];
       int _consecutiveWins = userData.data()['consecutiveWins'];
       int _totalWins = userData.data()['totalWins'];
