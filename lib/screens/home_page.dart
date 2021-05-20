@@ -14,70 +14,72 @@ class HomePage extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                child: FutureBuilder(
-                  future: userModel.getUserDocSnapShot(),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<DocumentSnapshot> snapshot) {
-                    if (snapshot.hasError) {
-                      return Text("Something went wrong");
-                    }
-
-                    if (snapshot.connectionState == ConnectionState.done) {
-                      Map<String, dynamic> data = snapshot.data.data();
-                      return Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            data['consecutiveWins'] > 1
-                                ? Text("${data['consecutiveWins']}連続正解中")
-                                : Text(''),
-                            Text("現在${data['point']}ポイント"),
-                          ],
-                        ),
-                      );
-                    }
-                    return Text("loading");
-                  },
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 50),
+              child: Column(
                 children: [
-                  SizedBox(
-                    height: size.width / 4.5,
-                    width: size.width / 4.5,
-                    child: ElevatedButton(
-                        onPressed: () async {
-                          bool result = randomBox(0);
-                          userModel.updateUserLuck(result);
-                        },
-                        child: Text('1')),
-                  ),
-                  SizedBox(
-                    height: size.width / 4.5,
-                    width: size.width / 4.5,
-                    child: ElevatedButton(
-                        onPressed: () async {
-                          bool result = randomBox(1);
-                          userModel.updateUserLuck(result);
-                        },
-                        child: Text('2')),
+                  Text('CURRENT POINTS'),
+                  FutureBuilder(
+                    future: userModel.getUserDocSnapShot(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<DocumentSnapshot> snapshot) {
+                      if (snapshot.hasError) {
+                        return Text("Something went wrong");
+                      }
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        Map<String, dynamic> data = snapshot.data.data();
+                        return Container(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              data['consecutiveWins'] > 1
+                                  ? Text("${data['consecutiveWins']}連続正解中")
+                                  : Text(''),
+                              Text(
+                                '${data['point']}',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 40.0,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                      return Text("loading");
+                    },
                   ),
                 ],
               ),
-              ElevatedButton(
-                child: Text('logout'),
-                onPressed: () async {
-                  await FirebaseAuth.instance.signOut();
-                },
-              ),
-            ],
-          ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                SizedBox(
+                  height: size.width / 4.5,
+                  width: size.width / 4.5,
+                  child: ElevatedButton(
+                      onPressed: () async {
+                        bool result = randomBox(0);
+                        userModel.updateUserLuck(result);
+                      },
+                      child: Text('1')),
+                ),
+                SizedBox(
+                  height: size.width / 4.5,
+                  width: size.width / 4.5,
+                  child: ElevatedButton(
+                      onPressed: () async {
+                        bool result = randomBox(1);
+                        userModel.updateUserLuck(result);
+                      },
+                      child: Text('2')),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
