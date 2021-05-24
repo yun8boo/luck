@@ -12,30 +12,91 @@ class UnLuckPage extends StatelessWidget {
         child: Column(
           children: [
             Container(
+              margin: EdgeInsets.only(top: 100),
               height: size.height / 3,
               width: double.infinity,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                image: AssetImage('assets/images/luck-background-img.png'),
+              )),
               child: SafeArea(
                 child: Center(
                   child: Text(
                     '🤯',
                     style: TextStyle(
-                      fontSize: 200,
+                      fontSize: 100,
                     ),
                   ),
                 ),
               ),
             ),
-            ElevatedButton(
-              onPressed: () async {
-                await Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return TopPage();
-                    },
+            Container(
+              margin: EdgeInsets.only(top: 15),
+              child: Column(
+                children: [
+                  Text(
+                    'Un luck!',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                    ),
                   ),
-                );
-              },
-              child: Text('pop'),
+                  Container(
+                    margin: EdgeInsets.only(top: 50),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'current point',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          '11',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 50),
+                    child: Text(
+                      'See you tomorrow',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 15),
+              child: SizedBox(
+                width: size.width / 1.5,
+                height: 52,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    elevation: 8,
+                    shape: const StadiumBorder(),
+                  ),
+                  onPressed: () async {
+                    await Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return TopPage();
+                        },
+                      ),
+                    );
+                  },
+                  child: Text('pop'),
+                ),
+              ),
             ),
           ],
         ),

@@ -12,21 +12,26 @@ class LuckPage extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              margin: EdgeInsets.symmetric(vertical: 50),
+              margin: EdgeInsets.only(top: 100),
               height: size.height / 3,
               width: double.infinity,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                image: AssetImage('assets/images/luck-background-img.png'),
+              )),
               child: SafeArea(
                 child: Center(
                   child: Text(
                     '🤩',
                     style: TextStyle(
-                      fontSize: 200,
+                      fontSize: 100,
                     ),
                   ),
                 ),
               ),
             ),
             Container(
+              margin: EdgeInsets.only(top: 15),
               child: Column(
                 children: [
                   Text(
@@ -36,33 +41,69 @@ class LuckPage extends StatelessWidget {
                       fontSize: 30,
                     ),
                   ),
-                  Text(
-                    '＋１',
-                    style: TextStyle(
-                      color: Colors.grey,
+                  Container(
+                    margin: EdgeInsets.only(top: 50),
+                    child: Text(
+                      '＋１',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                      ),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'current point',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                      Text(
+                        '11',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 50),
+                    child: Text(
+                      'See you tomorrow',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
-            SizedBox(
-              width: size.width / 1.5,
-              height: 44,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  elevation: 8,
-                  shape: const StadiumBorder(),
+            Container(
+              margin: EdgeInsets.only(top: 15),
+              child: SizedBox(
+                width: size.width / 1.5,
+                height: 52,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    elevation: 8,
+                    shape: const StadiumBorder(),
+                  ),
+                  onPressed: () async {
+                    await Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return TopPage();
+                        },
+                      ),
+                    );
+                  },
+                  child: Text('pop'),
                 ),
-                onPressed: () async {
-                  await Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return TopPage();
-                      },
-                    ),
-                  );
-                },
-                child: Text('pop'),
               ),
             ),
           ],

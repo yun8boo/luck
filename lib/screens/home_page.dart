@@ -16,12 +16,12 @@ class HomePage extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
             child: Column(
               children: [
                 Container(
-                  margin: const EdgeInsets.symmetric(vertical: 50),
                   child: Column(
                     children: [
                       Text('CURRENT POINTS'),
@@ -63,6 +63,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
           Container(
+            margin: EdgeInsets.only(top: 50),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -82,7 +83,10 @@ class HomePage extends StatelessWidget {
                         ),
                       );
                     },
-                    child: Text('🍎'),
+                    child: Text(
+                      '🍎',
+                      style: TextStyle(fontSize: 50),
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -101,7 +105,12 @@ class HomePage extends StatelessWidget {
                         ),
                       );
                     },
-                    child: Text('🍏'),
+                    child: Text(
+                      '🍏',
+                      style: TextStyle(
+                        fontSize: 50,
+                      ),
+                    ),
                   ),
                 ),
               ],
